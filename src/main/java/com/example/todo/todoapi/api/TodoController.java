@@ -18,10 +18,12 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/todos")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TodoController {
 
     private final TodoService todoService;
 
+    // 할 일 등록 요청
     @PostMapping
     public ResponseEntity<?> createTodo(
             @Validated @RequestBody TodoCreateRequestDTO requestDTO,
