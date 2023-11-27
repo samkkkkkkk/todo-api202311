@@ -1,7 +1,7 @@
 package com.example.todo.userapi.api;
 
-import com.example.todo.userapi.dto.UserRequestSignUpDTO;
-import com.example.todo.userapi.dto.UserSignUpResponseDTO;
+import com.example.todo.userapi.dto.request.UserRequestSignUpDTO;
+import com.example.todo.userapi.dto.response.UserSignUpResponseDTO;
 import com.example.todo.userapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")
+@CrossOrigin
 public class UserController {
 
     private final UserService userService;
@@ -23,26 +24,28 @@ public class UserController {
     @GetMapping("/check")
     public ResponseEntity<?> check(String email) {
         if(email.trim().isEmpty()) {
-            return ResponseEntity.badRequest().body("이메일이 없습니다.");
+            return ResponseEntity.badRequest()
+                    .body("이메일이 없습니다!");
         }
 
-         boolean resultFlag = userService.isDuplicate(email);
+        boolean resultFlag = userService.isDuplicate(email);
         log.info("{} 중복?? - {}", email, resultFlag);
 
         return ResponseEntity.ok().body(resultFlag);
     }
 
-
     // 회원 가입 요청 처리
     // POST: /api/auth
     @PostMapping
-    public ResponseEntity<?> signup(
+    public ResponseEntity<?> signUp(
             @Validated @RequestBody UserRequestSignUpDTO dto,
             BindingResult result
     ) {
         log.info("/api/auth POST! - {}", dto);
+//        log.info("email: {}", dto.getEmail());
 
         if(result.hasErrors()) {
+            log.warn(result.toString());
             return ResponseEntity.badRequest()
                     .body(result.getFieldError());
         }
@@ -59,3 +62,11 @@ public class UserController {
 
 
 }
+
+
+
+
+
+
+
+

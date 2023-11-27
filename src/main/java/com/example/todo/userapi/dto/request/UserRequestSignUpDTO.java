@@ -1,4 +1,4 @@
-package com.example.todo.userapi.dto;
+package com.example.todo.userapi.dto.request;
 
 import com.example.todo.userapi.entity.User;
 import lombok.*;
@@ -22,10 +22,10 @@ public class UserRequestSignUpDTO {
     private String password;
 
     @NotBlank
-    @Size(min = 2, max = 5)
+    @Size(min = 2, max = 6)
     private String userName;
 
-    //  dto를 Entity로 변경하는 메서드
+    // dto를 Entity로 변경하는 메서드
     public User toEntity() {
         return User.builder()
                 .email(this.email)
@@ -33,19 +33,9 @@ public class UserRequestSignUpDTO {
                 .userName(this.userName)
                 .build();
     }
-    
-    
-    
 
 
 }
-
-
-
-
-
-
-
 
 
 
