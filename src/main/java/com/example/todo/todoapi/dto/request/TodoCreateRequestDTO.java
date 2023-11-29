@@ -24,6 +24,7 @@ public class TodoCreateRequestDTO {
     public Todo toEntity(User user) {
         return Todo.builder()
                 .title(this.title)
+                .user(user)
                 .build();
     }
 
