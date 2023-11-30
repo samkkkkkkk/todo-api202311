@@ -48,6 +48,8 @@ public class WebSecurityConfig {
                 // /api/auth**은 permit이지만, //promote는 검증이 필요하기 때문에 추가(순서 조심!)
                 .antMatchers(HttpMethod.PUT, "/api/auth/promote")
                 .authenticated()
+                .antMatchers("/api/auth/load-profile")
+                .authenticated()
                 .antMatchers("/", "/api/auth/**").permitAll() // 순서가 중요하다
                 // '/api/todos'라는 요청이 POST로 들어오고, Role 값이 ADMIN인 경우 권한 검사 없이 허용하겠다.
 //                .antMatchers(HttpMethod.POST, "/api/todos").hasRole("ADMIN").permitAll()

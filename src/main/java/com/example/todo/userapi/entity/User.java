@@ -40,6 +40,8 @@ public class User {
 //    @ColumnDefault("'COMMON'") // enum 타입이여서 안쪽에 ''를 추가
     @Builder.Default
     private Role role = Role.COMMON;
+    
+    private String profileImg; // 프로필 이미지 경로
 
     // 등급 수정 메서드
     public void changeRole(Role role) {
